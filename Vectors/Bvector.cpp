@@ -3,12 +3,18 @@
 using namespace std;
 
 Bvector::Bvector(int nbits): Kvector((nbits + 31) / 32, 0), NBITS(nbits){
+    //cout << this << " : Bvector(" << NBITS << ") \n";
     u_m = (unsigned int *)m;
 }
 
 Bvector::Bvector(const Bvector& e): Kvector(3), NBITS(e.NBITS){
     u_m = (unsigned int *)m;
 }
+
+/*Bvector::~Bvector(){
+ *   cout << this << " : ~Bvector() \n";
+ *}
+ */
 
 bool Bvector::bit(int pos) const{
     if (pos >= NBITS) return false;

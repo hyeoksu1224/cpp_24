@@ -1,14 +1,14 @@
 #include "Kvector.h"
 
 Kvector::Kvector(int sz, int value){
-    cout << this << " : Kvector(" << sz << "," << value << ") \n";
+    //cout << this << " : Kvector(" << sz << "," << value << ") \n";
     len = sz;
     m = new int[len];
     for(int i=0;i<len;i++) m[i]=value;
 }
 
 Kvector::Kvector(const Kvector& v){
-    cout << this << " : Kvector(*" << &v << ") \n";
+    //cout << this << " : Kvector(*" << &v << ") \n";
     len = v.len;
     m = new int [len];
     int value = *(v.m);
@@ -16,7 +16,7 @@ Kvector::Kvector(const Kvector& v){
 }
 
 Kvector::~Kvector(){
-    cout << this << " : ~Kvector() \n";
+    //cout << this << " : ~Kvector() \n";
     delete[] m;
 }
 

@@ -8,6 +8,7 @@ protected:
 public:
     Bvector(int nbits = 32);
     Bvector(const Bvector& e);
+    //~Bvector();
     bool bit(int pos) const;
     void set(int pos);
     void reset(int pos);
