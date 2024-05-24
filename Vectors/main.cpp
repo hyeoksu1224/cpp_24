@@ -1,19 +1,35 @@
 #include <iostream>
-#include "BitSet.h"
+#include "Team.h"
+#include "Kvector.h"
+using namespace std;
 
 int main(int argc, char *argv[]){
-    BitSet b1(132), b2(131); //main에 try - catch가 필요하겠다.
-    b1.insert(3); b1.insert(5); b1.insert(8);
-    b2.insert(4); b2.insert(5); b2.insert(8); b2.insert(130);
-    b1.print(); b2.print();
-    cout << "b1= " << b1 << endl;
-    cout << "b2= " << b2 << endl;
-    try{
-        cout << "b1+b2= " << b1 + b2 <<endl;
-    }
-    catch (IncompatibleException& i){
-        cout << "In + operation, the operands are not compatible." << endl;
-        cout << "The size of the first Bitset is " << i.nbits1 << endl;
-        cout << "The size of the second Bitset is " << i.nbits2 << endl;
-    }
+    Kvector<int> v1(3, 0);
+    cout << "v1 : " << v1 << endl;
+    cout << "v1.sum() = " << v1.sum() << endl;
+
+    Kvector<int*> v2(5, nullptr);
+    int a[5] = {0, 1, 2, 3, 4};
+    for (int i = 0; i < 5; i++) v2[i] = &a[i];
+    cout << "v2 : " << v2 << endl;
+    for (int i = 0; i < 5; i++) cout << *(v2[i]) << " ";
+    cout << endl;
+    // cout << "v2.sum() = " << v2.sum() << endl; // compile error! pointer끼리 덧셈 불가
+
+    Kvector<Team> league1(2, Team()), league2(2, Team());
+    cout << "league1 : " << league1 << endl;
+    cout << "league2 : " << league2 << endl;
+    league1[0] = Team("Twins", 10);
+    league1[1] = Team("Bears", 5);
+    league2[0] = Team("Twins", 80);
+    league2[1] = Team("Bears", 81);
+    cout << "league1 : " << league1 << endl;
+    cout << "league2 : " << league2 << endl;
+    cout << "league1 == league2 : " << (league1 == league2) << endl;
+    league2[0] = Team("Bulls", 80);
+    league2[1] = Team("Warriors", 81);
+    cout << "league1 : " << league1 << endl;
+    cout << "league2 : " << league2 << endl;
+    cout << "league1.sum() = " << league1.sum() << endl;
+    cout << "league2.sum() = " << league2.sum() << endl;
 }

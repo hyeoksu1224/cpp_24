@@ -1,63 +1,77 @@
-#include "Kvector.h"
+//#include "Kvector.h"
 
-Kvector::Kvector(int sz, int value){
+template <class T>
+class Kvector;
+
+template <class T>
+Kvector<T>::Kvector(int sz, T value) : len(sz){
     //cout << this << " : Kvector(" << sz << "," << value << ") \n";
-    len = sz;
-    m = new int[len];
-    for(int i=0;i<len;i++) m[i]=value;
+    if (!sz){ m = NULL; return; }
+    m = new T[sz];
+    for(int i = 0; i < len; i++) m[i] = value;
 }
 
-Kvector::Kvector(const Kvector& v){
+template <class T>
+Kvector<T>::Kvector(const Kvector<T>& v){
     //cout << this << " : Kvector(*" << &v << ") \n";
     len = v.len;
-    m = new int [len];
-    int value = *(v.m);
-    for(int i=0;i<len;i++) m[i]=value;
+    if (!len){ m = NULL; return; }
+    m = new T [len];
+    for(int i = 0; i < len; i++) m[i] = v.m[i];
 }
 
-Kvector::~Kvector(){
+template <class T>
+Kvector<T>::~Kvector(){
     //cout << this << " : ~Kvector() \n";
     delete[] m;
 }
 
-void Kvector::print(){
-    for(int i=0;i<len;i++) std::cout<<m[i]<<" ";
-        std::cout<<std::endl;
+template <class T>
+void Kvector<T>::print() const{
+    std::cout << "Kvector<T>\n";
 }
 
-void Kvector::clear(){
+template <class T>
+void Kvector<T>::clear(){
     delete[] m;
-    m=nullptr;
-    len=0;
+    m = nullptr;
+    len = 0;
 }
 
-int Kvector::size() const{
+template <class T>
+T Kvector<T>::size() const{
     return len;
 }
 
-Kvector& Kvector::operator=(const Kvector& v){
-    std::cout << "Kvector::operator= " << &v << std::endl;
+template <class T>
+Kvector<T>& Kvector<T>::operator=(const Kvector<T>& v){
+    // std::cout << "Kvector::operator= " << &v << std::endl;
     delete[] m;
     len = v.size();
-    m = new int[len];
+    m = new T[len];
     for(int i=0;i<len;i++) m[i]=v.m[i];
     return *this;
 }
 
-bool operator ==(const Kvector &v, const Kvector &w){
-    bool value=true;
-    for(int i=0;i<v.size();i++){
-        if(v.m[i]!=w.m[i]){
-            value=false;
-            break;
-        }
-    }
-    return (v.size() == w.size()) && (value);
-}
-bool operator !=(const Kvector& v,const Kvector& w){
-    return !(v==w);
-}
-std::ostream& operator <<(std::ostream& os, const Kvector& v){
-    for(int i=0;i<v.size();i++) os<<v.m[i]<<' ';
-    return os;
-}
+// template <class T>
+// bool operator ==(const Kvector<T> &v, const Kvector<T> &w){
+//     bool value=true;
+//     for(int i=0;i<v.size();i++){
+//         if(v.m[i] != w.m[i]){
+//             value=false;
+//             break;
+//         }
+//     }
+//     return (v.size() == w.size()) && (value);
+// }
+// 
+// template <class T>
+// bool operator !=(const Kvector<T>& v,const Kvector<T>& w){
+//     return !(v==w);
+// }
+// 
+// template <class T>
+// std::ostream& operator <<(std::ostream& os, const Kvector<T>& v){
+//     for(int i=0;i<v.size();i++) os<<v.m[i]<<' ';
+//     return os;
+// }
