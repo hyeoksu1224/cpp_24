@@ -24,12 +24,12 @@ int main(){
     vector<char> v; deque<char> dq; list<char> li; set<char> s; multiset<char> ss;
     map<int, char> m; multimap<int, char> mm;
     for (int i = 0; i < 10; i++){
-        v.push_back(a[i]);
-        dq.push_back(a[i]);
-        li.push_back(a[i]);
-        s.insert(a[i]);
+        v.push_back(a[i]); // v[i] = a[i]만으로는 불가 왜? size.. capacity를 미리 늘려주거나 push
+        dq.push_back(a[i]); // vector와 동일
+        li.push_back(a[i]); // bidirectional이기 때문에 li[] = a[i] 불가
+        s.insert(a[i]); 
         ss.insert(a[i]);
-        m[i] = a[i];
+        m[i] = a[i]; // m[i] = a[i] 로 사용 가능, 자리를 새로 만들어줌
         mm.insert(pair<int,char>(i, a[i]));
     }
     print_container(v, "v= ");
