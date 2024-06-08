@@ -2,11 +2,11 @@
 CC = g++
 CCFLAGS = -g
 
-lab: lab.o team.o
-	$(CC) $(CCFLAGS) -o lab lab.o team.o
+modifying1 : modifying1.o
+	$(CC) $(CCFLAGS) -o modifying1 modifying1.o
 
-STL-lab: main.o
-	$(CC) $(CCFLAGS) -o STL-lab main.o
+modifying2 : modifying2.o
+	$(CC) $(CCFLAGS) -o modifying2 modifying2.o
 
 clean:
 	rm -f *.o
